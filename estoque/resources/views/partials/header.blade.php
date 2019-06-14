@@ -13,3 +13,7 @@
     <title>Estoque</title>
   </head>
   <body>
+      @yield('content')
+
+  </body>
+</html>
