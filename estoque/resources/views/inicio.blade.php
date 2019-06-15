@@ -13,9 +13,9 @@
         </div>
     </div>
 </div>
-<div class="d-block bg-white rounded border p-3">
 
-    <lista></lista>
 
-</div> 
+<lista></lista>
+
+
 @endsection

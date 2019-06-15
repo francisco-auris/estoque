@@ -20,6 +20,7 @@ Route::get('/', function () {
     }
 });
 
+Route::get('/teste', 'RefrigeranteController@teste')->name('teste');
 //Route::post('/login', 'LoginController@entrar')->name('login');
 Auth::routes();
 
@@ -30,3 +31,5 @@ Route::get('/cadastro', function(){
 })->name('cadastro');
 
 Route::get('/lista', 'RefrigeranteController@getLista')->name('lista');
+Route::post('/novo', 'RefrigeranteController@actionCreate')->name('novo');
+

@@ -1,47 +1,72 @@
-<template>
-<table class="table">
-        <thead>
-            <td>Marca</td>
-            <td>Tipo</td>
-            <td>Sabor</td>
-            <td>Litragem (mL/L)</td>
-            <td>Valor (R$)</td>
-        </thead>
-        <tbody>
-           <tr v-for="item in refrigerantes">
-                <td>{{item.marca}}</td>
-                <td>{{item.tipo}}</td>
-                <td>{{item.sabor}}</td>
-                <td>{{item.litragem}}</td>
-                <td>{{item.valor}}</td>
-           </tr>
-        </tbody>
-    </table>
-</template>
 <script>
-import axios from 'axios'
+import axios from 'axios';
+import pagination from './pagination.vue';
 
 export default {
+
+    components: { pagination },
 
     data() {
         return {
             refrigerantes: [],
+            paginas: []
         }
     },
     created: function() {
         this.getLista();
     },
     methods: {
-        getLista: function(){
+
+        navigate( page ){
+            this.getLista( page );
+            console.log(page);
+        },
+
+        getLista: function( page=null ){
             //alert('Teste');
-            var url = 'lista';
+            var pagina = (page == null) ? '' : page;
+            var url = 'lista?page='+pagina;
 
             axios.get(url).then(response => {
-                this.refrigerantes = response.data
-            }).catch(function( error ){ console.log(error); });
+                this.refrigerantes = response.data.data;
+                console.log(response.data);
+                this.paginas = response.data;
+            })
+            .catch(function( error ){ console.log(error); });
 
         }
     }
 
 }
 </script>
+
+<template>
+<div>
+    <div class="d-block bg-white rounded border p-3">
+        <table class="table">
+            <thead>
+                <td>Marca</td>
+                <td>Tipo</td>
+                <td>Sabor</td>
+                <td>Litragem (mL/L)</td>
+                <td>Valor (R$)</td>
+            </thead>
+            <tbody>
+            <tr v-for="item in refrigerantes">
+                    <td>{{item.marca}}</td>
+                    <td>{{item.tipo}}</td>
+                    <td>{{item.sabor}}</td>
+                    <td>{{item.litragem}}</td>
+                    <td>{{item.valor}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-block mt-2 mb-1">
+
+    <pagination :source="paginas" @navigate="navigate"></pagination>
+
+    </div>
+
+</div>
+</template>

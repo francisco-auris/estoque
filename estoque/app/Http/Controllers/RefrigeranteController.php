@@ -10,8 +10,22 @@ class RefrigeranteController extends Controller {
 
     public function getLista(){
         /**/
-        $ref = new Refrigerante();
-        return $ref->listAll();
+        /*$ref = new Refrigerante();
+        return $ref->listAll();*/
+        $lista = Refrigerante::paginate(2)->toArray();
+        return $lista;
+    }
+
+    public function actionCreate( Request $request ){
+
+
+
+    }
+
+    public function teste(){
+        $lista = Refrigerante::paginate(2)->toArray();
+        dd($lista);
+        return view('teste');
     }
     
 }

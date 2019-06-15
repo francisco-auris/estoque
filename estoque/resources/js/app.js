@@ -22,6 +22,7 @@ window.Vue = require('vue');
 //Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('lista', require('./components/lista.vue').default);
 Vue.component('cadastro', require('./components/cadastro.vue').default);
+//Vue.component('pagination', require('./components/pagination.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

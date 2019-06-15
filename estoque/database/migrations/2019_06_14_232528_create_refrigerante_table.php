@@ -13,7 +13,7 @@ class CreateRefrigeranteTable extends Migration
      */
     public function up()
     {
-        Schema::create('refrigerante', function (Blueprint $table) {
+        Schema::create('refrigerantes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('marca');
             $table->int('litragem');
