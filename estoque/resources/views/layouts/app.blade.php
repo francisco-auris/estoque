@@ -21,8 +21,12 @@
 </head>
 <body>
     <div id="app">
+<<<<<<< HEAD
             
        <!--<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+=======
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+>>>>>>> 65a28a1d48a43a11f902f6a498812896abfa0168
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -32,14 +36,24 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+<<<<<<< HEAD
                     <
+=======
+                    <!-- Left Side Of Navbar -->
+>>>>>>> 65a28a1d48a43a11f902f6a498812896abfa0168
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
 
+<<<<<<< HEAD
                     
                     <ul class="navbar-nav ml-auto">
                         
+=======
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Authentication Links -->
+>>>>>>> 65a28a1d48a43a11f902f6a498812896abfa0168
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -71,7 +85,11 @@
                     </ul>
                 </div>
             </div>
+<<<<<<< HEAD
         </nav>-->
+=======
+        </nav>
+>>>>>>> 65a28a1d48a43a11f902f6a498812896abfa0168
 
         <main class="py-4">
             @yield('content')
