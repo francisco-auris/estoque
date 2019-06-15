@@ -7,7 +7,9 @@ export default {
 
     data() {
         return {
-            pages: []
+            pages: [],
+            total: 1,
+            current: 1
         }
     },
 
@@ -15,6 +17,7 @@ export default {
         
         navigate( ev, page ){
             ev.preventDefault();
+            this.current = page;
             this.$emit('navigate', page);
         }
 
@@ -25,6 +28,7 @@ export default {
         source(){
 
             this.pages = range(1, this.source.last_page+1)
+            this.total = this.source.last_page;
             window.console.log(this.pages);
 
         }
@@ -36,17 +40,16 @@ export default {
 <template>
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-end">
-            <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            <li class="page-item" :class="{ disabled: source.current_page == 1 }">
+                <a class="page-link" href="#" @click="navigate($event, current-1)" tabindex="-1" >Anterior</a>
             </li>
-            <!--<li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">-->
+
                 <li v-for="page in pages" class="page-item" :class="{ active: source.current_page == page }">
                     <a class="page-link" href="#" @click="navigate($event, page)">{{ page }}</a>
                 </li>
-            <a class="page-link" href="#">Next</a>
+
+            <li class="page-item" :class="{ disabled: source.current_page == total }">
+                <a class="page-link" href="#" @click="navigate($event, current+1)">Próximo</a>
             </li>
         </ul>
     </nav>

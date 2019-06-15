@@ -13,6 +13,7 @@
 
         <style>
             .icon-sm { font-size: 18px; }
+            .table thead td { border-top:0px !important; }
         </style>
 
         <script>window.laravel = { csrfToken: '{{ csrf_token() }}' }</script>

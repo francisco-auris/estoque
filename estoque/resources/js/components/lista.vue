@@ -48,16 +48,19 @@ export default {
                 <td>Marca</td>
                 <td>Tipo</td>
                 <td>Sabor</td>
-                <td>Litragem (mL/L)</td>
+                <td>Litragem (L)</td>
                 <td>Valor (R$)</td>
+                <td colspan="2"></td>
             </thead>
             <tbody>
             <tr v-for="item in refrigerantes">
-                    <td>{{item.marca}}</td>
-                    <td>{{item.tipo}}</td>
-                    <td>{{item.sabor}}</td>
-                    <td>{{item.litragem}}</td>
-                    <td>{{item.valor}}</td>
+                <td>{{item.marca}}</td>
+                <td>{{item.tipo}}</td>
+                <td>{{item.sabor}}</td>
+                <td>{{item.litragem / 1000}}</td>
+                <td>{{item.valor}}</td>
+                <td><a href="#"><i class="material-icons icon-sm float-left">edit</i> Editar</a></td>
+                <td><a href="#"><i class="material-icons icon-sm float-left">delete</i> Excluir</a></td>
             </tr>
             </tbody>
         </table>

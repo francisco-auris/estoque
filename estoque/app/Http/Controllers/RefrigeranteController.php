@@ -12,7 +12,7 @@ class RefrigeranteController extends Controller {
         /**/
         /*$ref = new Refrigerante();
         return $ref->listAll();*/
-        $lista = Refrigerante::paginate(2)->toArray();
+        $lista = Refrigerante::paginate(10)->toArray();
         return $lista;
     }
 
