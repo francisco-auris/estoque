@@ -9,9 +9,9 @@ use App\Refrigerante;
 class RefrigeranteController extends Controller {
 
     public function getLista(){
-        /*$lista = DB::table('refrigerante')->get();
-        return json_encode( $lista );*/
-        return Refrigerante::orderBy('marca','DESC')->get();
+        /**/
+        $ref = new Refrigerante();
+        return $ref->listAll();
     }
     
 }

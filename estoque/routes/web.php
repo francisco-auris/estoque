@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-<<<<<<< HEAD
+
     if( Auth::check() ){
         return redirect('/home');
     }else {
@@ -25,12 +25,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/cadastro', function(){
+    return view('cadastro');
+})->name('cadastro');
+
 Route::get('/lista', 'RefrigeranteController@getLista')->name('lista');
-=======
-    return view('login');
-});
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
->>>>>>> 65a28a1d48a43a11f902f6a498812896abfa0168
