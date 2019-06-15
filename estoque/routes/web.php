@@ -12,5 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if( Auth::check() ){
+        return redirect('/home');
+    }else {
+        return redirect('/login');
+    }
 });
+
+//Route::post('/login', 'LoginController@entrar')->name('login');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/lista', 'RefrigeranteController@getLista')->name('lista');
