@@ -37,7 +37,7 @@
             </ul>
 
                 <div class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">

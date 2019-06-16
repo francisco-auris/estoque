@@ -20,6 +20,16 @@ class ProdutoController extends Controller
         return $lista;
     }
 
+    public function actionDelete( Request $req ){
+
+       
+        for( $i=0; $i < count($req->input()); $i++ ){
+            $act = DB::table('produtos')->where('id','=', $req->input()[$i])->delete();
+        }
+        return $act;
+
+    }
+
     public function actionUpdate( Request $request ){
 
         try {

@@ -10,6 +10,7 @@ export default {
         return {
             refrigerantes: [],
             paginas: [],
+            listdelete: [],
             filter: {},
             alerta: '',
             filtrado: ''
@@ -65,6 +66,28 @@ export default {
         closeFiltro: function(){
             this.getLista();
             this.filtrado = '';
+        },
+
+        actDelete: function(){
+            
+            var cmf = confirm("Deseja mesmo excluir este(s) item(s)?");
+            if( cmf == true ){
+                axios.post('/deleta', this.listdelete).then(response => {
+                    console.log(response);
+                    if( response.data == 1 ){
+                        alert("Items excluidos com sucesso.");
+                        this.getLista();
+                        this.listdelete = [];
+                    }
+                    else {
+                        alert("Error durante a exclusão dos items, favor tente novamente.");
+                    }
+
+                })
+                .catch(function(error){
+                    console.log(error);
+                });
+            }
         }
     }
 
@@ -105,34 +128,47 @@ export default {
     </div>
     <br><br>
     <div class="d-block bg-white rounded border p-3">
+    
         <table class="table">
             <thead>
+                <td></td>
                 <td>Marca</td>
-                <td>Tipo</td>
+                <td class="d-none d-sm-none d-md-block">Tipo</td>
                 <td>Sabor</td>
                 <td>Litragem</td>
                 <td>Valor (R$)</td>
                 <td>Em Qestoque</td>
-                <td colspan="2"></td>
+                <td></td>
             </thead>
             <tbody>
             <tr v-for="item in refrigerantes">
+                <td><input type="checkbox" v-model="listdelete" v-bind:value="item.id"></td>
                 <td>{{item.marca}}</td>
-                <td>{{item.tipo}}</td>
+                <td class="d-none d-sm-none d-md-block">{{item.tipo}}</td>
                 <td>{{item.sabor}}</td>
                 <td v-if="item.litragem < 1000">{{item.litragem}} ml</td>
                 <td v-else>{{item.litragem / 1000}} L</td>
                 <td>{{item.valor}}</td>
                 <td>{{item.quantidade}}</td>
-                <td><a :href="'/edita/' + item.id"><i class="material-icons icon-sm float-left">edit</i> Editar</a></td>
-                <td><a href="#"><i class="material-icons icon-sm float-left">delete</i> Excluir</a></td>
+                <td><a :href="'/edita/' + item.id"><i class="material-icons icon-sm float-left">edit</i><span class="d-none d-sm-none d-md-block">Editar</span></a></td>
             </tr>
             </tbody>
         </table>
     </div>
     <div class="d-block mt-2 mb-1">
-
-    <pagination :source="paginas" @navigate="navigate"></pagination>
+        <div class="row">
+            <div class="col-md-6 col-12">
+                <p v-if="listdelete.length > 0">
+                    {{ listdelete.length }} item(s) marcado(s)
+                    <a href="#" class="text-danger" @click="actDelete()"> Deseja excluir este(s) item(s)</a>
+                </p>
+                
+                <br>
+            </div>
+            <div class="col-md-6 col-12">
+                <pagination :source="paginas" @navigate="navigate"></pagination>
+            </div>
+        </div>
 
     </div>
 

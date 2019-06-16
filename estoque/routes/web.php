@@ -43,6 +43,8 @@ Route::post('/atualiza', 'ProdutoController@actionUpdate')->name('atualiza');
 
 Route::post('/filtro', 'ProdutoController@getFiltro')->name('filtro');
 
+Route::post('/deleta', 'ProdutoController@actionDelete')->name('deleta');
+
 Route::post('/produto/{id}', function( App\Produto $id ){
     return $id;
 });

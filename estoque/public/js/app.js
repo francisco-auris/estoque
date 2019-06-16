@@ -1898,6 +1898,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       refrigerantes: [],
       paginas: [],
+      listdelete: [],
       filter: {},
       alerta: '',
       filtrado: ''
@@ -1946,6 +1947,29 @@ __webpack_require__.r(__webpack_exports__);
     closeFiltro: function closeFiltro() {
       this.getLista();
       this.filtrado = '';
+    },
+    actDelete: function actDelete() {
+      var _this3 = this;
+
+      var cmf = confirm("Deseja mesmo excluir este(s) item(s)?");
+
+      if (cmf == true) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/deleta', this.listdelete).then(function (response) {
+          console.log(response);
+
+          if (response.data == 1) {
+            alert("Items excluidos com sucesso.");
+
+            _this3.getLista();
+
+            _this3.listdelete = [];
+          } else {
+            alert("Error durante a exclusão dos items, favor tente novamente.");
+          }
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
     }
   }
 });
@@ -37955,9 +37979,52 @@ var render = function() {
           "tbody",
           _vm._l(_vm.refrigerantes, function(item) {
             return _c("tr", [
+              _c("td", [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.listdelete,
+                      expression: "listdelete"
+                    }
+                  ],
+                  attrs: { type: "checkbox" },
+                  domProps: {
+                    value: item.id,
+                    checked: Array.isArray(_vm.listdelete)
+                      ? _vm._i(_vm.listdelete, item.id) > -1
+                      : _vm.listdelete
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.listdelete,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = item.id,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.listdelete = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.listdelete = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.listdelete = $$c
+                      }
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
               _c("td", [_vm._v(_vm._s(item.marca))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(item.tipo))]),
+              _c("td", { staticClass: "d-none d-sm-none d-md-block" }, [
+                _vm._v(_vm._s(item.tipo))
+              ]),
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(item.sabor))]),
               _vm._v(" "),
@@ -37976,11 +38043,11 @@ var render = function() {
                     { staticClass: "material-icons icon-sm float-left" },
                     [_vm._v("edit")]
                   ),
-                  _vm._v(" Editar")
+                  _c("span", { staticClass: "d-none d-sm-none d-md-block" }, [
+                    _vm._v("Editar")
+                  ])
                 ])
-              ]),
-              _vm._v(" "),
-              _vm._m(1, true)
+              ])
             ])
           }),
           0
@@ -37988,17 +38055,48 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "d-block mt-2 mb-1" },
-      [
-        _c("pagination", {
-          attrs: { source: _vm.paginas },
-          on: { navigate: _vm.navigate }
-        })
-      ],
-      1
-    )
+    _c("div", { staticClass: "d-block mt-2 mb-1" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6 col-12" }, [
+          _vm.listdelete.length > 0
+            ? _c("p", [
+                _vm._v(
+                  "\r\n                    " +
+                    _vm._s(_vm.listdelete.length) +
+                    " item(s) marcado(s)\r\n                    "
+                ),
+                _c(
+                  "a",
+                  {
+                    staticClass: "text-danger",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.actDelete()
+                      }
+                    }
+                  },
+                  [_vm._v(" Deseja excluir este(s) item(s)")]
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("br")
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-md-6 col-12" },
+          [
+            _c("pagination", {
+              attrs: { source: _vm.paginas },
+              on: { navigate: _vm.navigate }
+            })
+          ],
+          1
+        )
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -38007,9 +38105,13 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", [
+      _c("td"),
+      _vm._v(" "),
       _c("td", [_vm._v("Marca")]),
       _vm._v(" "),
-      _c("td", [_vm._v("Tipo")]),
+      _c("td", { staticClass: "d-none d-sm-none d-md-block" }, [
+        _vm._v("Tipo")
+      ]),
       _vm._v(" "),
       _c("td", [_vm._v("Sabor")]),
       _vm._v(" "),
@@ -38019,20 +38121,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("td", [_vm._v("Em Qestoque")]),
       _vm._v(" "),
-      _c("td", { attrs: { colspan: "2" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { attrs: { href: "#" } }, [
-        _c("i", { staticClass: "material-icons icon-sm float-left" }, [
-          _vm._v("delete")
-        ]),
-        _vm._v(" Excluir")
-      ])
+      _c("td")
     ])
   }
 ]
