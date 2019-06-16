@@ -48,7 +48,7 @@ export default {
                 <td>Marca</td>
                 <td>Tipo</td>
                 <td>Sabor</td>
-                <td>Litragem (L)</td>
+                <td>Litragem</td>
                 <td>Valor (R$)</td>
                 <td colspan="2"></td>
             </thead>
@@ -57,7 +57,8 @@ export default {
                 <td>{{item.marca}}</td>
                 <td>{{item.tipo}}</td>
                 <td>{{item.sabor}}</td>
-                <td>{{item.litragem / 1000}}</td>
+                <td v-if="item.litragem < 1000">{{item.litragem}} ml</td>
+                <td v-else>{{item.litragem / 1000}} L</td>
                 <td>{{item.valor}}</td>
                 <td><a href="#"><i class="material-icons icon-sm float-left">edit</i> Editar</a></td>
                 <td><a href="#"><i class="material-icons icon-sm float-left">delete</i> Excluir</a></td>

@@ -6,7 +6,7 @@
 </div>
 
 <div class="d-block bg-white rounded border p-3">
-    <cadastro></cadastro>
+    <cadastro csrf="{{csrf_token()}}"></cadastro>
 </div>
 
 @endsection

@@ -1745,30 +1745,75 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['csrf'],
   data: function data() {
     return {
-      errors: [],
-      marca: null
+      //errors: [],
+      marca: null,
+      field: {},
+      errors: {}
     };
   },
   methods: {
-    checkForm: function checkForm(e) {
-      this.errors = [];
+    //envio de formulario
+    submit: function submit() {
+      var _this = this;
 
-      if (!this.marca) {
-        this.errors.push("Campo marca e obrigatório");
+      this.errors = {}; //reseta mensagens 
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/novo', this.field).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
+
+        if (error.response.status === 422) {
+          _this.errors = error.response.data.errors || {};
+        }
+      });
+    },
+    limpaForm: function limpaForm() {
+      for (field in this.fields) {
+        this.fields[field] = "";
       }
-
-      if (!this.errors.length) {
-        return true;
-      }
-
-      e.preventDefault();
     }
   }
 });
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/filtro.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/filtro.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 
@@ -37153,134 +37198,235 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("form", { on: { submit: _vm.checkForm } }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-12 col-12" }, [
-          _c("label", [_vm._v("Marca")]),
-          _vm._v(" "),
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.submit($event)
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "row" }, [
           _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.marca,
-                expression: "marca"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", name: "marca", maxlength: "50" },
-            domProps: { value: _vm.marca },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.marca = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _vm._m(0),
-        _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _vm._m(2),
-        _vm._v(" "),
-        _vm._m(3),
-        _vm._v(" "),
-        _vm._m(4),
-        _vm._v(" "),
-        _vm._m(5),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-12" }, [
-          _c("p"),
-          _vm.errors.length
-            ? _c(
-                "div",
-                { staticClass: "alert alert-danger" },
-                _vm._l(_vm.errors, function(error) {
-                  return _c("span", [_vm._v(_vm._s(error) + " "), _c("br")])
-                }),
-                0
-              )
-            : _vm._e(),
+            attrs: { name: "_token", hidden: "" },
+            domProps: { value: _vm.csrf }
+          }),
           _vm._v(" "),
-          _c("p")
+          _c("div", { staticClass: "col-md-12 col-12" }, [
+            _c("label", [_vm._v("Marca")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.field.marca,
+                  expression: "field.marca"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                name: "marca",
+                maxlength: "50",
+                required: ""
+              },
+              domProps: { value: _vm.field.marca },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.field, "marca", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4 col-6" }, [
+            _c("label", [_vm._v("Sabor")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.field.sabor,
+                  expression: "field.sabor"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", name: "sabor", maxlength: "30" },
+              domProps: { value: _vm.field.sabor },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.field, "sabor", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4 col-6" }, [
+            _c("label", [_vm._v("Tipo")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.field.tipo,
+                    expression: "field.tipo"
+                  }
+                ],
+                staticClass: "form-control",
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.field,
+                      "tipo",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "Lata" } }, [_vm._v("Lata")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Pet" } }, [_vm._v("Pet")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Garrafa" } }, [
+                  _vm._v("Garrafa")
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4 col-6" }, [
+            _c("label", [_vm._v("Litragem (mL)")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.field.litragem,
+                  expression: "field.litragem"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "number", name: "litragem", min: "0", step: "10" },
+              domProps: { value: _vm.field.litragem },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.field, "litragem", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4 col-6" }, [
+            _c("label", [_vm._v("Quantidade")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.field.quantidade,
+                  expression: "field.quantidade"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "number",
+                name: "quantidade",
+                min: "0",
+                step: "1"
+              },
+              domProps: { value: _vm.field.quantidade },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.field, "quantidade", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4 col-6" }, [
+            _c("label", [_vm._v("Valor (R$)")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.field.valor,
+                  expression: "field.valor"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "number",
+                name: "valor",
+                min: "0",
+                step: "0.05",
+                value: "0"
+              },
+              domProps: { value: _vm.field.valor },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.field, "valor", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-12" }, [
+            _c("p"),
+            _vm.errors && _vm.errors.message
+              ? _c("div", { staticClass: "alert alert-danger" }, [
+                  _c("span", [
+                    _vm._v(_vm._s(_vm.msg.message[0]) + " "),
+                    _c("br")
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("p")
+          ])
         ])
-      ])
-    ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4 col-6" }, [
-      _c("label", [_vm._v("Sabor")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", maxlength: "30" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4 col-6" }, [
-      _c("label", [_vm._v("Tipo")]),
-      _vm._v(" "),
-      _c("select", { staticClass: "form-control" }, [
-        _c("option", [_vm._v("Lata")]),
-        _vm._v(" "),
-        _c("option", [_vm._v("Pet")]),
-        _vm._v(" "),
-        _c("option", [_vm._v("Garrafa")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4 col-6" }, [
-      _c("label", [_vm._v("Litragem (mL)")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "number", min: "0", step: "10" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4 col-6" }, [
-      _c("label", [_vm._v("Quantidade")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "number", min: "0", step: "1" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4 col-6" }, [
-      _c("label", [_vm._v("Valor (R$)")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "number", min: "0", step: "0.05", value: "0" }
-      })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -37396,7 +37542,9 @@ var render = function() {
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(item.sabor))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(item.litragem / 1000))]),
+              item.litragem < 1000
+                ? _c("td", [_vm._v(_vm._s(item.litragem) + " ml")])
+                : _c("td", [_vm._v(_vm._s(item.litragem / 1000) + " L")]),
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(item.valor))]),
               _vm._v(" "),
@@ -37435,7 +37583,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("td", [_vm._v("Sabor")]),
       _vm._v(" "),
-      _c("td", [_vm._v("Litragem (L)")]),
+      _c("td", [_vm._v("Litragem")]),
       _vm._v(" "),
       _c("td", [_vm._v("Valor (R$)")]),
       _vm._v(" "),
@@ -49892,15 +50040,17 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _filtro_vue_vue_type_template_id_85be49da___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./filtro.vue?vue&type=template&id=85be49da& */ "./resources/js/components/filtro.vue?vue&type=template&id=85be49da&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _filtro_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./filtro.vue?vue&type=script&lang=js& */ "./resources/js/components/filtro.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _filtro_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _filtro_vue_vue_type_template_id_85be49da___WEBPACK_IMPORTED_MODULE_0__["render"],
   _filtro_vue_vue_type_template_id_85be49da___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -49914,6 +50064,20 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/components/filtro.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/filtro.vue?vue&type=script&lang=js&":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/filtro.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_filtro_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./filtro.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/filtro.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_filtro_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

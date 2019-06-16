@@ -18,7 +18,28 @@ class RefrigeranteController extends Controller {
 
     public function actionCreate( Request $request ){
 
+        //validate valores post in form
+        /*$this->validate($request, [
+            'marca' => 'required|string',
+            'sabor' => 'required|string',
+            'litragem' => 'required|integer',
+            'tipo' => 'required|string',
+            'quantidade' => 'required|integer',
+            'valor' => 'required|decimal'
+        ]);*/
 
+        $model = new Refrigerante();
+        //joga valores para modelagem no banco
+        $model->marca = $request->input('marca');
+        $model->sabor = $request->input('sabor');
+        $model->litragem = $request->input('litragem');
+        $model->valor = $request->input('valor');
+        $model->quantidade = $request->input('quantidade');
+        $model->tipo = $request->input('tipo');
+
+        $action = $model->modelInsert();
+
+        return $action;
 
     }
 
