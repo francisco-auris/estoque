@@ -14,6 +14,28 @@ class ProdutoController extends Controller
         return $lista;
     }
 
+    public function actionUpdate( Request $request ){
+
+        try {
+
+            $request->validate([
+                'marca' => 'required|string',
+                'sabor' => 'required|string'
+            ]);
+            
+            $action = DB::table('produtos')->where('id', $request->input('id'))->update( $request->input() );
+
+            return response()->json($action);
+            
+        }
+        catch( Exception $e ){
+            report($e);
+            return false;
+        }
+
+
+    }
+
     public function actionCreate( Request $request ){
 
         try {

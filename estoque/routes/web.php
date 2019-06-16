@@ -31,5 +31,17 @@ Route::get('/cadastro', function(){
 })->name('cadastro');
 
 Route::get('/lista', 'ProdutoController@getLista')->name('lista');
+
+
+Route::get('/edita/{id}', function( App\Produto $id){
+    return view('edicao', $id);
+})->where('id', '[0-9]')->name('edita');
+
 Route::post('/novo', 'ProdutoController@actionCreate')->name('novo');
+
+Route::post('/atualiza', 'ProdutoController@actionUpdate')->name('atualiza');
+
+Route::post('/produto/{id}', function( App\Produto $id ){
+    return $id;
+});
 

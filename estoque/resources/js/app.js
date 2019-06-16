@@ -22,6 +22,7 @@ window.Vue = require('vue');
 //Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('lista', require('./components/lista.vue').default);
 Vue.component('cadastro', require('./components/cadastro.vue').default);
+Vue.component('edicao', require('./components/edicao.vue').default);
 Vue.component('filtro', require('./components/filtro.vue').default);
 //Vue.component('pagination', require('./components/pagination.vue'));
 
