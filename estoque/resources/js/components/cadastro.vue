@@ -37,7 +37,13 @@
                 <div class="col-12">
                     <p >
                         <div class="alert alert-danger" v-if="errors && errors.message">
-                            <span >{{ msg.message[0] }} <br></span>
+                            <span >{{ errors.message[0] }} <br></span>
+                        </div>
+                        <div class="alert alert-success" v-if="success != ''">
+                            <span >{{ success }} <br></span>
+                        </div>
+                        <div class="alert alert-info" v-if="info != ''">
+                            <span >{{ info }} <br></span>
                         </div>
                     </p>
                 </div>
@@ -58,17 +64,32 @@ export default {
             //errors: [],
             marca: null,
             field: {},
-            errors: {}
+            errors: {},
+            success: '',info: ''
         }
     },
     methods: {
         
         //envio de formulario
-        submit() {
+        submit( event ) {
+
             this.errors = {}; //reseta mensagens 
+            this.info = '';
+            this.success = '';
+
+            console.log(this.field);
             axios.post('/novo', this.field).then(response => {
 
                 console.log(response);
+                if( response.data == true ){
+                    this.success = 'Produto salvo com sucess.';
+                    event.target.reset();
+                    //this.limpaForm();
+                }
+                if( response.data == 'exist' ){
+                    this.info = 'Já existe um produto cadastro com esta marca e litragem.';
+                    //this.limpaForm();
+                }
 
             }).catch(error => {
                 console.log(error);

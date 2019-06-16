@@ -3,25 +3,19 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
+//use Illuminate\Support\Facades\DB;
 
 class Refrigerante extends Model
 {
     //
-    protected $fillable = ['marca','litragem','sabor','tipo','valor'];
+    protected $fillable = ['marca','litragem','sabor','tipo','valor','quantidade'];
 
     protected $hidden = ['id'];
 
-    private $id;
-    private $marca;
-    private $litragem;
-    private $sabor;
-    private $valor;
-    private $quantidade;
-    private $tipo;
+    protected $table = 'refrigerantes';
 
-    function __set( $atb, $vl ){ $this->$atb = $vl; }
-    function __get( $atb ){ return $this->$atb; }
+    protected $primaryKey = 'id';
+    public $incrementing = true;
 
     public function listAll(){
         $lista = DB::table('refrigerantes')->paginate(10)->get();

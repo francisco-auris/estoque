@@ -1746,6 +1746,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['csrf'],
@@ -1754,18 +1760,32 @@ __webpack_require__.r(__webpack_exports__);
       //errors: [],
       marca: null,
       field: {},
-      errors: {}
+      errors: {},
+      success: '',
+      info: ''
     };
   },
   methods: {
     //envio de formulario
-    submit: function submit() {
+    submit: function submit(event) {
       var _this = this;
 
       this.errors = {}; //reseta mensagens 
 
+      this.info = '';
+      this.success = '';
+      console.log(this.field);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/novo', this.field).then(function (response) {
         console.log(response);
+
+        if (response.data == true) {
+          _this.success = 'Produto salvo com sucess.';
+          event.target.reset(); //this.limpaForm();
+        }
+
+        if (response.data == 'exist') {
+          _this.info = 'Já existe um produto cadastro com esta marca e litragem.'; //this.limpaForm();
+        }
       })["catch"](function (error) {
         console.log(error);
 
@@ -37413,9 +37433,21 @@ var render = function() {
             _vm.errors && _vm.errors.message
               ? _c("div", { staticClass: "alert alert-danger" }, [
                   _c("span", [
-                    _vm._v(_vm._s(_vm.msg.message[0]) + " "),
+                    _vm._v(_vm._s(_vm.errors.message[0]) + " "),
                     _c("br")
                   ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.success != ""
+              ? _c("div", { staticClass: "alert alert-success" }, [
+                  _c("span", [_vm._v(_vm._s(_vm.success) + " "), _c("br")])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.info != ""
+              ? _c("div", { staticClass: "alert alert-info" }, [
+                  _c("span", [_vm._v(_vm._s(_vm.info) + " "), _c("br")])
                 ])
               : _vm._e(),
             _vm._v(" "),

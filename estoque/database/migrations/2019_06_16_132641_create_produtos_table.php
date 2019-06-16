@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRefrigeranteTable extends Migration
+class CreateProdutosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateRefrigeranteTable extends Migration
      */
     public function up()
     {
-        Schema::create('refrigerantes', function (Blueprint $table) {
+        Schema::create('produtos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('marca');
             $table->integer('litragem');
@@ -21,6 +21,8 @@ class CreateRefrigeranteTable extends Migration
             $table->integer('quantidade');
             $table->string('sabor');
             $table->double('valor',15,2);
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 
@@ -31,6 +33,6 @@ class CreateRefrigeranteTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('refrigerante');
+        Schema::dropIfExists('produtos');
     }
 }

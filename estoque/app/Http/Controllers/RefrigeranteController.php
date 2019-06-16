@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+//use Illuminate\Support\Facades\DB;
 use App\Refrigerante;
 
 class RefrigeranteController extends Controller {
@@ -18,28 +18,31 @@ class RefrigeranteController extends Controller {
 
     public function actionCreate( Request $request ){
 
-        //validate valores post in form
-        /*$this->validate($request, [
-            'marca' => 'required|string',
-            'sabor' => 'required|string',
-            'litragem' => 'required|integer',
-            'tipo' => 'required|string',
-            'quantidade' => 'required|integer',
-            'valor' => 'required|decimal'
-        ]);*/
+        try {
 
-        $model = new Refrigerante();
-        //joga valores para modelagem no banco
-        $model->marca = $request->input('marca');
-        $model->sabor = $request->input('sabor');
-        $model->litragem = $request->input('litragem');
-        $model->valor = $request->input('valor');
-        $model->quantidade = $request->input('quantidade');
-        $model->tipo = $request->input('tipo');
+            $request->validate([
+                'marca' => 'required|string',
+                'sabor' => 'required|string'
+            ]);
 
-        $action = $model->modelInsert();
+            $model = new Refrigerante();
+            //joga valores para modelagem no banco
+            $model->marca = $request->input('marca');
+            $model->sabor = $request->input('sabor');
+            $model->litragem = $request->input('litragem');
+            $model->valor = $request->input('valor');
+            $model->quantidade = $request->input('quantidade');
+            $model->tipo = $request->input('tipo');
 
-        return $action;
+            $model->save();
+
+            return response()->json($request->input());
+
+        }
+        catch( Exception $e ){
+            report($e);
+            return false;
+        }
 
     }
 

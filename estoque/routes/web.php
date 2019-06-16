@@ -30,6 +30,6 @@ Route::get('/cadastro', function(){
     return view('cadastro');
 })->name('cadastro');
 
-Route::get('/lista', 'RefrigeranteController@getLista')->name('lista');
-Route::post('/novo', 'RefrigeranteController@actionCreate')->name('novo');
+Route::get('/lista', 'ProdutoController@getLista')->name('lista');
+Route::post('/novo', 'ProdutoController@actionCreate')->name('novo');
 
