@@ -14,6 +14,12 @@ class ProdutoController extends Controller
         return $lista;
     }
 
+    public function getFiltro( Request $req ){
+        //return $req->input();
+        $lista = Produto::where( $req->input('campo'), 'LIKE', $req->input('valor') )->paginate(10)->toArray();
+        return $lista;
+    }
+
     public function actionUpdate( Request $request ){
 
         try {

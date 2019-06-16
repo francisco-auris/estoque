@@ -7,10 +7,6 @@
     
 </div>
 
-<div class="d-block mb-5">
-   <filtro></filtro>
-</div>
-
 
 <lista></lista>
 

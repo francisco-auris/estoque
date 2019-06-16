@@ -41,6 +41,8 @@ Route::post('/novo', 'ProdutoController@actionCreate')->name('novo');
 
 Route::post('/atualiza', 'ProdutoController@actionUpdate')->name('atualiza');
 
+Route::post('/filtro', 'ProdutoController@getFiltro')->name('filtro');
+
 Route::post('/produto/{id}', function( App\Produto $id ){
     return $id;
 });
