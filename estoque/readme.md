@@ -14,7 +14,7 @@ Sistema de cadastro de refrigerantes
 
 ---
 <br>
-Funções do sistema:
+Funções do sistema
 ------------------
 * Cadastro de produtos
 * Edição de produtos
@@ -22,5 +22,14 @@ Funções do sistema:
 * Filtro de busca
 * Autenticacao de usuário no sistema
 <br>
+
+Cadastro de refrigerante
+----
++ Clique no link '+ Cadastrar refrigerante'
++ Preencher todos os campos do formulario, todos são obrigatorios
++ Campo de litragem preencher valor em mililitros (ex.: 1500 = 1,5L)
++ Clique em salvar
++ Caso já exista um refrigerante cadastrado com a mesma marca e litragem o sistema retornara uma mensagem de alerta
++ Para conclusão aguarde a mensagem de confirmação do cadastro
     
 
