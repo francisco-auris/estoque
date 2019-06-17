@@ -2,7 +2,7 @@ Sistema de Estoque - Desafio Fullstack
 ===
 Sistema de cadastro de refrigerantes
 ------------------
-[Acesso ao sistema](http://ec2-18-222-130-218.us-east-2.compute.amazonaws.com/login)
+[Acesso ao sistema](http://ec2-18-222-130-218.us-east-2.compute.amazonaws.com/login), 
 [Para se cadastrar no sistema](http://ec2-18-222-130-218.us-east-2.compute.amazonaws.com/register)
 <br>
 <br>
@@ -17,6 +17,7 @@ Sistema de cadastro de refrigerantes
 <br>
 Funções do sistema
 ------------------
+
 * Cadastro de produtos
 * Edição de produtos
 * Select multiplo de exclusão de produtos
